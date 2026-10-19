@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101018">
+  <meta name="description" content="Terra Twins — discover and share videos.">
+  <title>Terra Twins — Watch & Share</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Terra Twins home">
+      <span class="brand-mark">TT</span><span>TERRA <b>TWINS</b></span>
+    </a>
+    <form id="searchForm" class="search" role="search">
+      <input id="searchInput" type="search" placeholder="Search videos..." aria-label="Search videos">
+      <button aria-label="Search" type="submit">⌕</button>
+    </form>
+    <div class="top-actions">
+      <button id="uploadOpen" class="primary-button">＋ <span>Upload</span></button>
+      <button id="loginOpen" class="avatar-button" aria-label="Sign in">👤</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <button class="nav-item active" data-category="All"><span>⌂</span> Home</button>
+      <button class="nav-item" data-category="Trending"><span>↗</span> Trending</button>
+      <button class="nav-item" data-category="Music"><span>♫</span> Music</button>
+      <button class="nav-item" data-category="Gaming"><span>🎮</span> Gaming</button>
+      <button class="nav-item" data-category="Comedy"><span>☻</span> Comedy</button>
+      <button class="nav-item" data-category="Education"><span>▤</span> Education</button>
+      <div class="side-divider"></div>
+      <p class="side-heading">YOUR SPACE</p>
+      <button class="nav-item" id="myVideos"><span>▣</span> My videos</button>
+      <button class="nav-item" id="savedVideos"><span>♡</span> Saved videos</button>
+      <div class="sidebar-note">
+        <strong>Your stories belong here.</strong>
+        <p>Share what you create with the Terra Twins community.</p>
+      </div>
+      <p class="tiny">Terra Twins · Demo version</p>
+    </aside>
+
+    <main class="content">
+      <section class="welcome">
+        <div>
+          <p class="eyebrow">YOUR VIDEO COMMUNITY</p>
+          <h1>Watch something <span>good.</span></h1>
+          <p class="welcome-sub">Discover videos, share your creativity, and find your people.</p>
+        </div>
+        <div class="welcome-symbol" aria-hidden="true">▶</div>
+      </section>
+
+      <div class="category-row" id="categoryRow">
+        <button class="chip selected" data-category="All">All</button>
+        <button class="chip" data-category="Trending">Trending</button>
+        <button class="chip" data-category="Music">Music</button>
+        <button class="chip" data-category="Gaming">Gaming</button>
+        <button class="chip" data-category="Comedy">Comedy</button>
+        <button class="chip" data-category="Education">Education</button>
+        <button class="chip" data-category="Sports">Sports</button>
+      </div>
+
+      <div class="section-title">
+        <div><h2 id="sectionHeading">Explore videos</h2><p id="sectionSub">A few examples to get you started</p></div>
+        <span class="live-label"><i></i> COMMUNITY</span>
+      </div>
+
+      <div id="videoGrid" class="video-grid"></div>
+      <div id="emptyState" class="empty-state" hidden>
+        <div class="empty-icon">⌕</div><h3>No videos found</h3>
+        <p>Try a different search or upload the first video in this category.</p>
+        <button id="emptyUpload" class="primary-button">＋ Upload a video</button>
+      </div>
+      <footer><span>© <span id="year"></span> Terra Twins</span><span>Be creative. Be respectful.</span></footer>
+    </main>
+  </div>
+
+  <dialog id="watchDialog" class="modal watch-modal">
+    <button class="modal-close" data-close="watchDialog" aria-label="Close">×</button>
+    <div id="playerArea" class="player-area"></div>
+    <div class="watch-info">
+      <div><h2 id="watchTitle"></h2><p id="watchMeta"></p></div>
+      <div class="watch-actions"><button id="watchLike" class="soft-button">♡ Like</button><button id="watchSave" class="soft-button">＋ Save</button></div>
+    </div>
+    <p id="watchDescription" class="watch-description"></p>
+    <section class="comments">
+      <h3>Comments</h3>
+      <p class="demo-warning">Comments are a visual demo in this starter version.</p>
+      <form id="commentForm"><input id="commentInput" placeholder="Add a comment..." maxlength="300" aria-label="Comment"><button class="primary-button">Post</button></form>
+      <div id="commentList"></div>
+    </section>
+  </dialog>
+
+  <dialog id="uploadDialog" class="modal form-modal">
+    <button class="modal-close" data-close="uploadDialog" aria-label="Close">×</button>
+    <p class="eyebrow">SHARE WITH THE COMMUNITY</p><h2>Upload a video</h2>
+    <p class="form-intro">Add a video file or a public video URL. In this demo, uploads are saved only in this browser; they are not published to other people's devices.</p>
+    <form id="uploadForm" class="stack-form">
+      <label>Video title<input id="videoTitle" required maxlength="100" placeholder="Give your video a title"></label>
+      <label>Description<textarea id="videoDescription" rows="3" maxlength="1000" placeholder="What is your video about?"></textarea></label>
+      <label>Category<select id="videoCategory"><option>Music</option><option>Gaming</option><option>Comedy</option><option>Education</option><option>Sports</option><option>Entertainment</option></select></label>
+      <label>Video file (optional)<input id="videoFile" type="file" accept="video/*"></label>
+      <label>Or public video URL (optional)<input id="videoUrl" type="url" placeholder="https://..."></label>
+      <label>Thumbnail image (optional)<input id="thumbnailFile" type="file" accept="image/*"></label>
+      <p class="field-note">For a local demo, keep videos small. Browser storage is limited and may be cleared. Never upload content you do not have permission to share.</p>
+      <button class="primary-button full-button" type="submit">Save video to this browser</button>
+    </form>
+  </dialog>
+
+  <dialog id="loginDialog" class="modal form-modal small-modal">
+    <button class="modal-close" data-close="loginDialog" aria-label="Close">×</button>
+    <p class="eyebrow">WELCOME TO TERRA TWINS</p><h2>Your account</h2>
+    <p class="form-intro">Account sign-in is not connected in this starter website. This form is a preview only.</p>
+    <form id="loginForm" class="stack-form">
+      <label>Display name<input id="displayName" required maxlength="40" placeholder="Your creator name"></label>
+      <label>Email<input id="emailInput" type="email" required placeholder="you@example.com"></label>
+      <button class="primary-button full-button">Preview profile</button>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
